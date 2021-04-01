@@ -1,3 +1,4 @@
+const getProperty24Data = require('./getProperty24Data');
 const getPrivatePropertyData = require('./getPrivatePropertyData');
 
 const axios = require('axios');
@@ -19,21 +20,6 @@ async function getPropertyData(url) {
             title: $('meta[property="og:title"]').attr('content'),
             description: $('meta[name="description"]').attr('content')
         }
-    }
-}
-
-function getProperty24Data($, url) {
-    return {
-        location: url.split('/')[4],
-        price: $('meta[name="twitter:data1"]').attr('content'),
-        image: $('meta[property="og:image"]').attr('content'),
-        title: $('meta[property="og:title"]').attr('content'),
-        bedrooms: $('.p24_featureDetails[title="Bedrooms"]').children('span').text(),
-        bathrooms: $('.p24_featureDetails[title="Bathrooms"]').children('span').text(),
-        parking: $('.p24_featureDetails[title="Parking Spaces"]').children('span').text(),
-        floorSize: $('.p24_featureDetails[title="Floor Size"]').children('span').text(),
-        levy: '',
-        rates: '',
     }
 }
 

@@ -9,11 +9,11 @@ function getPrivatePropertyData($) {
         const text = $('script').contents().text();
         const findAndClean = findTextAndReturnRemainder(text, 'dataLayer =');
         const object = findAndClean.split('[').toString().split(']').toString()
-            .replace(/ /g, '')
-            .replace(/-/g, '')
-            .replace(/'/g, '"')
-            .replace(/\n/g, '')
-            .slice(1, -1);
+        .replace(/ /g, '')
+        .replace(/-/g, '')
+        .replace(/'/g, '"')
+        .replace(/\n/g, '')
+        .slice(1, -1);
         return JSON.parse(object)
     }
 
@@ -52,6 +52,15 @@ function getPrivatePropertyData($) {
         return dataFields;
     }
 
+    function getPropertyImages() {
+        let images = []
+        $('#modalGallery > div > div > img').each((index, element) => {
+            images.push(element.attribs['data-src'])
+        })
+
+        return images
+    }
+
     const dataFromDataLayer = getDataFromDataLayer();
     const featureColumnsClassData = getDataFromFeatureColumnsClass();
     const mainFeaturesClassData = getDataFromMainFeaturesClass();
@@ -67,6 +76,7 @@ function getPrivatePropertyData($) {
         floorSize: mainFeaturesClassData['FloorArea'],
         levy: mainFeaturesClassData['Levy'],
         rates: mainFeaturesClassData['Rates'],
+        images: getPropertyImages()
     }
 }
 
